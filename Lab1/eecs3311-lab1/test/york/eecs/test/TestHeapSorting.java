@@ -21,7 +21,7 @@ public class TestHeapSorting {
 	    public void setUp() throws Exception {
 		 heapsort = new HeapSort();
 	    }
-	 
+	  
 	    @Test
 	    public void test_heap_basic() {
 		Map<String, Double> map_to_be_sorted = new HashMap<String, Double>();
