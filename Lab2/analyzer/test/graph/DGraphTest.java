@@ -36,10 +36,10 @@ public class DGraphTest {
     	b1.add("1"); b1.add("2"); b1.add("4"); 
     	
     	ArrayList<String> b2 = new ArrayList<String>();
-    	b1.add("1"); b1.add("2"); b1.add("3"); 
+    	b2.add("1"); b2.add("2"); b2.add("3"); 
     	
     	ArrayList<String> b3 = new ArrayList<String>();
-    	b1.add("1"); b1.add("3"); 
+    	b3.add("1"); b3.add("3"); 
     	
     	expected.add(b1);
     	expected.add(b2);
