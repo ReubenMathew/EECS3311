@@ -56,12 +56,30 @@ public class ListDGraph<V> implements DGraph<V> {
 		this.vList.add(vertex);
 		return this.vList.indexOf(vertex) + 1;
 	}
-
+	
+	//	CURRENTLY BROKEN <- FIX IT
 	@Override
 	public boolean addE(Edge<V> e) {
-		/**
-		 * TODO: implement the addE function;
-		 */
+
+		if (e == null) {
+			return false;
+		}
+
+		V src = e.getSource();
+		V dest = e.getDest();
+		
+		if (!this.vList.contains(src) || !this.vList.contains(dest)) {
+			System.out.println("M5");
+			return false;
+		}
+
+		for (int i = 0; i < vList.size(); i++) {
+			V vertexName = vList.get(i).getV();
+			if (vertexName.equals(src)) {
+				return vList.get(i).addEdge(e);
+			}
+		}
+
 		return false;
 	}
 

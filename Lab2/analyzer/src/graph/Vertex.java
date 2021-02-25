@@ -37,25 +37,24 @@ public class Vertex<V> {
 	}
 
 	/**
-     * add an edge to the edge list of this vertex.
-     * if add successfully return true;
-     * if edge exists: print `M3` and return false;
-     * if `e`'s src is not this vertex: print `M5` and return false;
-     * @param e
-     */
-    public boolean addEdge(Edge<V> e) {
-    	if(edgeList.contains(e)) {
-    		System.out.println("M3");
-    		return false;
-    	}
-    	else if(!e.getSource().equals(this)) {
-    		System.out.println("M5");
-    		return false;
-    	}else {
-        	this.edgeList.add(e);
-        	return true;	
-    	}
-    }
+	 * add an edge to the edge list of this vertex. if add successfully return true;
+	 * if edge exists: print `M3` and return false; if `e`'s src is not this vertex:
+	 * print `M5` and return false;
+	 * 
+	 * @param e
+	 */
+	public boolean addEdge(Edge<V> e) {
+		if (edgeList.contains(e)) {
+			System.out.println("M3");
+			return false;
+		} else if (!e.getSource().equals(this)) {
+			System.out.println("M5");
+			return false;
+		} else {
+			this.edgeList.add(e);
+			return true;
+		}
+	}
 
 	/**
 	 * get an edge between this vertex and the destination V "dest"; if 'dest' does
@@ -88,10 +87,6 @@ public class Vertex<V> {
 	}
 
 	/**
-	 * check if given edge is the same as this edge if self check, return true if
-	 * given edge is null, return false if type and check and cast are not the same,
-	 * return false
-	 * 
 	 * @param o
 	 * @return boolean
 	 */

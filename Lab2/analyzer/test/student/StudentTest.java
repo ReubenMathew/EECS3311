@@ -117,7 +117,7 @@ public class StudentTest {
 			System.out.println(graph.toString());
 			throw e;
 		}
-		
+
 		/**
 		 * get index that is out of bounds
 		 */
@@ -136,6 +136,34 @@ public class StudentTest {
 		vertex = graph_o.getV(0);
 		Assert.assertNull(vertex);
 
+	}
+
+	@Test
+	public void test_edge_null() {
+		/**
+		 * add a null Edge
+		 */
+		boolean success = graph.addE(null);
+		Assert.assertEquals(false, success);
+
+	}
+
+	@Test
+	public void test_edge_add() {
+
+		Edge<String> e = new Edge<String>("2", "3");
+		/**
+		 * add an existing edge
+		 */
+		boolean success = graph.addE(e);
+		Assert.assertEquals(false, success);
+
+		/**
+		 * add a new edge
+		 */
+		Edge<String> e1 = new Edge<String>("4", "1");
+		success = graph.addE(e1);
+		Assert.assertEquals(true, success);
 	}
 
 }
