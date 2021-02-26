@@ -1,6 +1,8 @@
 package graph;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.LinkedList;
 
 /**
@@ -56,8 +58,8 @@ public class ListDGraph<V> implements DGraph<V> {
 		this.vList.add(vertex);
 		return this.vList.indexOf(vertex) + 1;
 	}
-	
-	//	CURRENTLY BROKEN <- FIX IT
+
+	// CURRENTLY BROKEN <- FIX IT
 	@Override
 	public boolean addE(Edge<V> e) {
 
@@ -67,20 +69,25 @@ public class ListDGraph<V> implements DGraph<V> {
 
 		V src = e.getSource();
 		V dest = e.getDest();
-		
-		if (!this.vList.contains(src) || !this.vList.contains(dest)) {
-			System.out.println("M5");
-			return false;
-		}
+
+//		if (!this.vList.contains(src) || !this.vList.contains(dest)) {
+////			System.out.println("SRC: " + src.toString());
+////			System.out.println("M5");
+//			return false;
+//		}
 
 		for (int i = 0; i < vList.size(); i++) {
 			V vertexName = vList.get(i).getV();
 			if (vertexName.equals(src)) {
-				return vList.get(i).addEdge(e);
+//				System.out.println(vertexName.toString());
+				Vertex<V> newVertex = vList.get(i);
+				boolean success = newVertex.addEdge(e);
+				vList.set(i, newVertex);
+				return success;
 			}
 		}
 
-		return false;
+		return true;
 	}
 
 	/**
@@ -108,9 +115,14 @@ public class ListDGraph<V> implements DGraph<V> {
 
 	@Override
 	public Edge<V> removeE(Edge<V> e) {
-		/**
-		 * TODO: implement the removeE function;
-		 */
+
+		for (int i = 0; i < this.vList.size(); i++) {
+			Vertex<V> vertex = vList.get(i);
+			if (e.getSource() == vertex.getV()) {
+				return vertex.removeEdge(e.getDest());
+			}
+		}
+		System.out.println("M6");
 		return null;
 	}
 
@@ -136,27 +148,41 @@ public class ListDGraph<V> implements DGraph<V> {
 
 	@Override
 	public Edge<V> getE(int src, int dest) {
-		/**
-		 * TODO: implement the getE function;
-		 */
-		return null;
+
+		if (src >= this.vList.size() || dest >= this.vList.size()) {
+			System.out.println("M5");
+			return null;
+		}
+
+		return vList.get(src).getEdge(vList.get(dest).getV());
+
 	}
 
 	@Override
 	public ArrayList<ArrayList<V>> branches(V v) {
-		/**
-		 * TODO: iterate the Graph from a given vertex and return all the branches from
-		 * it;
-		 */
-		return null;
+
+		ArrayList<ArrayList<V>> result = new ArrayList<ArrayList<V>>();
+		int[][] matrix = this.matrix();
+		System.out.println(this.toString());
+		return result;
 	}
 
 	@Override
 	public int[][] matrix() {
-		/**
-		 * TODO: generate the adjacency matrix of a graph;
-		 */
-		return null;
+
+		int size = this.vList.size();
+
+		int[][] matrix = new int[size][size];
+
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				if (this.getE(i, j) != null) {
+					matrix[i][j] = 1;
+				}
+			}
+		}
+
+		return matrix;
 
 	}
 }

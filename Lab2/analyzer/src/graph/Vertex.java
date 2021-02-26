@@ -44,10 +44,20 @@ public class Vertex<V> {
 	 * @param e
 	 */
 	public boolean addEdge(Edge<V> e) {
-		if (edgeList.contains(e)) {
-			System.out.println("M3");
-			return false;
-		} else if (!e.getSource().equals(this)) {
+//		if (edgeList.contains(e)) {
+//			System.out.println("M3");
+//			return false;
+//		} else 
+
+		for (int i = 0; i < this.edgeList.size(); i++) {
+			Edge<V> edge = edgeList.get(i);
+			if (edge.getSource() == e.getSource() && edge.getDest() == e.getDest()) {
+				System.out.println("M3");
+				return false;
+			}
+		}
+
+		if (!e.getSource().equals(this.v)) {
 			System.out.println("M5");
 			return false;
 		} else {
@@ -65,9 +75,14 @@ public class Vertex<V> {
 	 * @return
 	 */
 	public Edge<V> getEdge(V dest) {
-		/**
-		 * TODO: get the edge between this vertex and the destination V "dest";
-		 */
+		for (int i = 0; i < this.edgeList.size(); i++) {
+			Edge<V> edge = this.edgeList.get(i);
+			if (edge.getDest() == dest) {
+				return edge;
+			}
+		}
+
+		System.out.println("M6");
 		return null;
 	}
 
@@ -80,10 +95,16 @@ public class Vertex<V> {
 	 * @return removed Edge<V>
 	 */
 	public Edge<V> removeEdge(V dest) {
-		/**
-		 * TODO: removed an edge
-		 */
-		return null;
+		
+		Edge<V> edge = this.getEdge(dest);
+		
+		if (edge == null) {
+			return null;
+		}
+
+		this.edgeList.remove(edge);
+		
+		return edge;
 	}
 
 	/**
@@ -91,10 +112,6 @@ public class Vertex<V> {
 	 * @return boolean
 	 */
 	public boolean equals(Vertex<V> o) {
-		/**
-		 * TODO: implement the comparison between two vertices IFF `v` and `edgeList`
-		 * are the same return true
-		 */
 		if (this == o)
 			return true;
 
