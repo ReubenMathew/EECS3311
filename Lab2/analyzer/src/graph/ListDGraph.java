@@ -2,6 +2,7 @@ package graph;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -59,7 +60,6 @@ public class ListDGraph<V> implements DGraph<V> {
 		return this.vList.indexOf(vertex) + 1;
 	}
 
-	// CURRENTLY BROKEN <- FIX IT
 	@Override
 	public boolean addE(Edge<V> e) {
 
@@ -70,11 +70,10 @@ public class ListDGraph<V> implements DGraph<V> {
 		V src = e.getSource();
 		V dest = e.getDest();
 
-//		if (!this.vList.contains(src) || !this.vList.contains(dest)) {
-////			System.out.println("SRC: " + src.toString());
-////			System.out.println("M5");
-//			return false;
-//		}
+		// circular edge check
+		if (src.equals(dest)) {
+			return false;
+		}
 
 		for (int i = 0; i < vList.size(); i++) {
 			V vertexName = vList.get(i).getV();
@@ -161,10 +160,38 @@ public class ListDGraph<V> implements DGraph<V> {
 	@Override
 	public ArrayList<ArrayList<V>> branches(V v) {
 
-		ArrayList<ArrayList<V>> result = new ArrayList<ArrayList<V>>();
+		ArrayList<ArrayList<V>> branches = new ArrayList<ArrayList<V>>();
 		int[][] matrix = this.matrix();
-		System.out.println(this.toString());
-		return result;
+
+		// find vertex index
+		int root = 0;
+		for (int i = 0; i < this.vList.size(); i++) {
+			if (v.equals(vList.get(i).getV())) {
+				root = i;
+				break;
+			}
+		}
+
+		this.dive(root, matrix, new ArrayList<V>(), branches);
+
+		return branches;
+	}
+
+	private ArrayList<V> dive(int root, int[][] matrix, ArrayList<V> branch, ArrayList<ArrayList<V>> branches) {
+
+		branch.add(this.getV(root));
+
+		for (int i = 0; i < this.vList.size(); i++) {
+			if (matrix[root][i] == 1) {
+				ArrayList<V> newBranch = new ArrayList<V>(branch);
+				ArrayList<V> toAdd = dive(i, matrix, newBranch, branches);
+				if (Arrays.stream(matrix[i]).sum() == 0) {
+					branches.add(toAdd);
+				}
+			}
+		}
+
+		return branch;
 	}
 
 	@Override
