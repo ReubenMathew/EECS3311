@@ -1,9 +1,7 @@
 package graph;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Deque;
 import java.util.LinkedList;
 
 /**
@@ -51,7 +49,7 @@ public class ListDGraph<V> implements DGraph<V> {
 		for (int i = 0; i < vList.size(); i++) {
 			V vertexName = vList.get(i).getV();
 			if (vertexName.equals(v)) {
-				System.out.println("M2");
+				System.out.println(util.Message.M2.toString());
 				return -1;
 			}
 		}
@@ -107,7 +105,7 @@ public class ListDGraph<V> implements DGraph<V> {
 			}
 		}
 
-		System.out.println("M5");
+		System.out.println(util.Message.M5.toString());
 		return null;
 
 	}
@@ -121,7 +119,7 @@ public class ListDGraph<V> implements DGraph<V> {
 				return vertex.removeEdge(e.getDest());
 			}
 		}
-		System.out.println("M6");
+		System.out.println(util.Message.M6.toString());
 		return null;
 	}
 
@@ -132,12 +130,12 @@ public class ListDGraph<V> implements DGraph<V> {
 	public V getV(int index) {
 
 		if (this.vList.isEmpty()) {
-			System.out.println("M4");
+			System.out.println(util.Message.M4.toString());
 			return null;
 		}
 
 		if (index < 0 || index >= this.vList.size()) {
-			System.out.println("M4");
+			System.out.println(util.Message.M4.toString());
 			return null;
 		}
 
@@ -149,7 +147,7 @@ public class ListDGraph<V> implements DGraph<V> {
 	public Edge<V> getE(int src, int dest) {
 
 		if (src >= this.vList.size() || dest >= this.vList.size()) {
-			System.out.println("M5");
+			System.out.println(util.Message.M4.toString());
 			return null;
 		}
 
@@ -171,13 +169,11 @@ public class ListDGraph<V> implements DGraph<V> {
 				break;
 			}
 		}
-		
+
 		if (root == -1) {
-			System.out.println("M6");
+			System.out.println(util.Message.M5.toString());
 			return null;
 		}
-		
-		
 
 		this.dive(root, matrix, new ArrayList<V>(), branches);
 

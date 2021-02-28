@@ -52,13 +52,13 @@ public class Vertex<V> {
 		for (int i = 0; i < this.edgeList.size(); i++) {
 			Edge<V> edge = edgeList.get(i);
 			if (edge.getSource() == e.getSource() && edge.getDest() == e.getDest()) {
-				System.out.println("M3");
+				System.out.println(util.Message.M3.toString());
 				return false;
 			}
 		}
 
 		if (!e.getSource().equals(this.v)) {
-			System.out.println("M5");
+			System.out.println(util.Message.M5.toString());
 			return false;
 		} else {
 			this.edgeList.add(e);
@@ -82,7 +82,7 @@ public class Vertex<V> {
 			}
 		}
 
-		System.out.println("M6");
+		System.out.println(util.Message.M6.toString());
 		return null;
 	}
 
