@@ -164,13 +164,20 @@ public class ListDGraph<V> implements DGraph<V> {
 		int[][] matrix = this.matrix();
 
 		// find vertex index
-		int root = 0;
+		int root = -1;
 		for (int i = 0; i < this.vList.size(); i++) {
 			if (v.equals(vList.get(i).getV())) {
 				root = i;
 				break;
 			}
 		}
+		
+		if (root == -1) {
+			System.out.println("M6");
+			return null;
+		}
+		
+		
 
 		this.dive(root, matrix, new ArrayList<V>(), branches);
 

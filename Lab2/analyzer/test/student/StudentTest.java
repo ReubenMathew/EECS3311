@@ -485,7 +485,7 @@ public class StudentTest {
 	}
 
 	@Test
-	public void test_branches() {
+	public void test_branches_1() {
 		// Iterate the graph from V "1"
 		ArrayList<ArrayList<String>> bs;
 		bs = graph.branches("1");
@@ -511,6 +511,37 @@ public class StudentTest {
 		expected.add(b3);
 
 		Assert.assertEquals(bs.size(), expected.size());
+	}
+
+	@Test
+	public void test_branches_2() {
+		// Iterate the graph from V "2"
+		ArrayList<ArrayList<String>> bs;
+		bs = graph.branches("2");
+
+		ArrayList<ArrayList<String>> expected = new ArrayList<ArrayList<String>>();
+		ArrayList<String> b1 = new ArrayList<String>();
+		b1.add("2");
+		b1.add("4");
+		b1.add("5");
+
+		ArrayList<String> b2 = new ArrayList<String>();
+
+		b2.add("2");
+		b2.add("3");
+
+		expected.add(b1);
+		expected.add(b2);
+
+		Assert.assertEquals(bs.size(), expected.size());
+	}
+
+	@Test
+	public void test_branches_3() {
+		// Iterate from non-existent node
+		ArrayList<ArrayList<String>> bs;
+		bs = graph.branches("10");
+		Assert.assertEquals(bs, null);
 	}
 
 }
