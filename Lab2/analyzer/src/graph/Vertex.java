@@ -86,6 +86,16 @@ public class Vertex<V> {
 		return null;
 	}
 
+	Edge<V> getEdgeDebug(V dest) {
+		for (int i = 0; i < this.edgeList.size(); i++) {
+			Edge<V> edge = this.edgeList.get(i);
+			if (edge.getDest() == dest) {
+				return edge;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * remove an edge from the edge list of this vertex if 'dest' exists return the
 	 * removed edge; if 'dest' does not exist: print `M5` and return null; if edge
@@ -95,15 +105,15 @@ public class Vertex<V> {
 	 * @return removed Edge<V>
 	 */
 	public Edge<V> removeEdge(V dest) {
-		
+
 		Edge<V> edge = this.getEdge(dest);
-		
+
 		if (edge == null) {
 			return null;
 		}
 
 		this.edgeList.remove(edge);
-		
+
 		return edge;
 	}
 

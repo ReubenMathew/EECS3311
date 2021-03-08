@@ -76,7 +76,6 @@ public class ListDGraph<V> implements DGraph<V> {
 		for (int i = 0; i < vList.size(); i++) {
 			V vertexName = vList.get(i).getV();
 			if (vertexName.equals(src)) {
-//				System.out.println(vertexName.toString());
 				Vertex<V> newVertex = vList.get(i);
 				boolean success = newVertex.addEdge(e);
 				vList.set(i, newVertex);
@@ -142,6 +141,20 @@ public class ListDGraph<V> implements DGraph<V> {
 		return this.vList.get(index).getV();
 
 	}
+	
+	private V getVertex(int index) {
+
+		if (this.vList.isEmpty()) {
+			return null;
+		}
+
+		if (index < 0 || index >= this.vList.size()) {
+			return null;
+		}
+
+		return this.vList.get(index).getV();
+
+	}
 
 	@Override
 	public Edge<V> getE(int src, int dest) {
@@ -151,7 +164,7 @@ public class ListDGraph<V> implements DGraph<V> {
 			return null;
 		}
 
-		return vList.get(src).getEdge(vList.get(dest).getV());
+		return vList.get(src).getEdgeDebug(vList.get(dest).getV());
 
 	}
 
@@ -182,7 +195,7 @@ public class ListDGraph<V> implements DGraph<V> {
 
 	private ArrayList<V> dive(int root, int[][] matrix, ArrayList<V> branch, ArrayList<ArrayList<V>> branches) {
 
-		branch.add(this.getV(root));
+		branch.add(this.getVertex(root));
 
 		for (int i = 0; i < this.vList.size(); i++) {
 			if (matrix[root][i] == 1) {
