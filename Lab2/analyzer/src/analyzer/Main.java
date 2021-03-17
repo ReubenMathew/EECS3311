@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import analyzer.CFGAnalyzer;
+
 /**
  * @desc entrance of lab2
  * @author wangs and you
@@ -225,7 +227,7 @@ public class Main {
 				int action = curr;
 				graph.addV(action);
 				graph.addE(new Edge<Integer>(decision, action));
-				
+
 				// final node
 				curr++;
 				int finalNode = curr;
@@ -269,11 +271,19 @@ public class Main {
 			return;
 		}
 
-		ArrayList<String> lines = scan.readin();
-		DGraph<Integer> graph = scan.buildTree(lines);
-		System.out.println("-------------------");
-		System.out.println(graph.toString());
-		System.out.println(graph.branches(1).toString());
+//		ArrayList<String> lines = scan.readin();
+//		DGraph<Integer> graph = scan.buildTree(lines);
+//		System.out.println("-------------------");
+//		System.out.println(graph.toString());
+//		System.out.println(graph.branches(1).toString());
+
+		Director director = new Director();
+		CFGAnalyzerBuilder matrixBuilder = new MatrixBuilder();
+
+		director.setCFGBuilder(matrixBuilder);
+		director.constructCFGAnalyzer();
+
+		CFGAnalyzer cfgAnalyzer = director.getCFGAnalyzer();
 
 		/**
 		 * @TODO: 1. has option `g` (i.e., cfg is true): Task: build the CFG and print
